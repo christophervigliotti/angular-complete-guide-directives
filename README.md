@@ -2,8 +2,29 @@
 
 This is one of several repos that I created for the course "Angular - The Complete Guide (2022 Edition)". For a complete list of repos created for this course: https://gist.github.com/christophervigliotti/92e5b3b93cbe9d630d8e9d81b7eb6636 .
 
+## 101. Building a Structural Directive
 
-## ngFor and ngIf Recap
+## 100. What Happens behind the Scenes on Structural Directives
+
+## 99. Binding to Directive Properties
+
+## 98. Using HostBinding to Bind to Host Properties
+
+## 97. Using HostListener to Listen to Host Events
+
+## 96. More about the Renderer
+
+## 95. Using the Renderer to build a Better Attribute Directive
+
+## 94. Creating a Basic Attribute Directive
+
+## 93. ngClass and ngStype Recap
+
+https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/6656166#overview 
+
+## 92. ngFor and ngIf Recap
+
+https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/6656164#overview
 
 ### loop through all numbers
 
@@ -24,7 +45,7 @@ numbers = [1, 2, 3, 4, 5];
 
 ### loop through odd or even numbers (toggle with button)
 
-app template 
+app template - conditional display of one array or another based on the value of boolean variable `onlyOdd`...
 ```
 <div class="container">
   <div class="row">
@@ -52,14 +73,14 @@ app template
 </div>
 ```
 
-app component 
+app component, declare the odd and even arrays...
 ```
 oddNumbers = [1, 3, 5, 7, 9, 11];
 evenNumbers = [2, 4, 6, 8];
 onlyOdd = false;
 ```
 
-## 91 Module Introduction
+## 91. Module Introduction
 
 Attribute Directives vs Structural Directives
 
