@@ -4,19 +4,119 @@ This is one of several repos that I created for the course "Angular - The Comple
 
 ## 101. Building a Structural Directive
 
+link
+
+notes
+```
+code
+```
+
+notes
+```
+code
+```
+
 ## 100. What Happens behind the Scenes on Structural Directives
+
+link
+
+notes
+```
+code
+```
+
+notes
+```
+code
+```
 
 ## 99. Binding to Directive Properties
 
+link
+
+notes
+```
+code
+```
+
+notes
+```
+code
+```
+
 ## 98. Using HostBinding to Bind to Host Properties
+
+link
+
+notes
+```
+code
+```
+
+notes
+```
+code
+```
 
 ## 97. Using HostListener to Listen to Host Events
 
+link
+
+notes
+```
+code
+```
+
+notes
+```
+code
+```
+
 ## 96. More about the Renderer
+
+link
+
+notes
+```
+code
+```
+
+notes
+```
+code
+```
 
 ## 95. Using the Renderer to build a Better Attribute Directive
 
+link
+
+notes
+```
+code
+```
+
+notes
+```
+code
+```
+
 ## 94. Creating a Basic Attribute Directive
+
+https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/13193718#overview
+
+* ngClass and ngStyle are attribute directives
+* build a directive that highlights an element that we hover over
+* created new subfolder of app `basic-highlight`
+* created new file `basic-highlight.directive.ts`
+
+```
+code
+```
+
+notes
+```
+code
+```
 
 ## 93. ngClass and ngStype Recap
 
