@@ -22,6 +22,50 @@ This is one of several repos that I created for the course "Angular - The Comple
 
 https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/6656166#overview 
 
+### red text only if number is odd (with "ngClass")
+
+Using `[ngClass]="{odd: odd % 2 == 0}" ` in app.template...
+
+```
+<div *ngIf="onlyOdd">
+  <li
+    class="list-group-item" 
+    [ngClass]="{odd: odd % 2 !== 0}"
+    *ngFor="let odd of oddNumbers" 
+  >{{ odd }}</li>
+</div>
+<div *ngIf="!onlyOdd">
+  <li
+    class="list-group-item"
+    [ngClass]="{odd: odd % 2 == 0}" 
+    *ngFor="let even of evenNumbers" 
+  >{{ even }}</li>
+</div>
+```
+
+### yellow background only if number is odd (with "ngStyle")
+
+using [ngStyle]="{backgroundColor: odd % 2 !== 0?'yellow':'transparent'}"
+
+```
+<div *ngIf="onlyOdd">
+  <li
+    class="list-group-item" 
+    [ngClass]="{odd: odd % 2 !== 0}" 
+    [ngStyle]="{backgroundColor: odd % 2 !== 0?'yellow':'transparent'}"
+    *ngFor="let odd of oddNumbers" 
+  >{{ odd }}</li>
+</div>
+<div *ngIf="!onlyOdd">
+  <li
+    class="list-group-item"
+    [ngClass]="{odd: odd % 2 == 0}" 
+    [ngStyle]="{backgroundColor: odd % 2 == 0?'yellow':'transparent'}"
+    *ngFor="let even of evenNumbers" 
+  >{{ even }}</li>
+</div>
+```
+
 ## 92. ngFor and ngIf Recap
 
 https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/6656164#overview
