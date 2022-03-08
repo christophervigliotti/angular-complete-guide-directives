@@ -107,15 +107,59 @@ https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/13193
 * ngClass and ngStyle are attribute directives
 * build a directive that highlights an element that we hover over
 * created new subfolder of app `basic-highlight`
-* created new file `basic-highlight.directive.ts`
+* created new file `basic-highlight.directive.ts` 
+
+### basic.highlight.directive.ts
+
+This defines our custom attribute directive.  `selector: '[appBasicHighlight]'` defines our selector.  In this example we could implement this directive in a template using `<p appBasicHighlight>I respect your mother</p>` where `appBasicHighlight` is a unique selector.  The square brackets around the selector name allows us to apply the directive to any tag that contains the directive name.  If the brackets were not present TODO: define what the behavior is and note sample usage when square brackets are not used.  
+  
+We inject the element that the directive sits on by passing it into the constructor function `constructor(private elementRef: ElementRef){}` where `private elementRef: ElementRef` is the element reference argument.  To use the data everywhere in the class (outside of the constructor) we specify that the argument is `private`.  We are doing just that in function `ngOnInit`.
 
 ```
-code
+import { Directive, ElementRef, OnInit } from "@angular/core";
+@Directive({
+    selector: '[appBasicHighlight]'
+})
+export class BasicHighlightDirective implements OnInit {
+    constructor(private elementRef: ElementRef){}
+    ngOnInit() {
+        this.elementRef.nativeElement.style.backgroundColor = 'orange';
+    }
+}
 ```
 
-notes
+### app.module.ts
+
+Inform Angular that we have this directive.  We must import it and declare it.  We import it via `import { BasicHighlightDirective } from './basic-highlight/basic-highlight.directive';` and declare it in the `declarations` array in the `@NgModule` call.
+
 ```
-code
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BasicHighlightDirective } from './basic-highlight/basic-highlight.directive';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    BasicHighlightDirective
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+### app.component.html
+
+To implement this new directive, simply add it as an attribute of the tag where you want to apply it..
+```
+<p appBasicHighlight>Style me with basic directive</p>
 ```
 
 ## 93. ngClass and ngStype Recap
