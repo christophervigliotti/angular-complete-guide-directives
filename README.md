@@ -88,16 +88,65 @@ code
 
 ## 95. Using the Renderer to build a Better Attribute Directive
 
-link
+https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/6656172#overview
 
-notes
+### better-highlight.directive.ts
+
+* Command `ng g d better-highlight` generates the new directive (and a test that I deleted).  File was moved into subfolder `better-highlight`.
+* Renderer2 is injected into the constructor method...as with the previous method, scoping the var to `private` allows us to access it in other methods in this object/directive.  
+* setStyle() method is used to change the background-color to blue
+
 ```
-code
+import { Directive, OnInit, ElementRef, Renderer2 } from '@angular/core';
+@Directive({
+  selector: '[appBetterHighlight]'
+})
+export class BetterHighlightDirective implements OnInit {
+  constructor(
+    private elRef: ElementRef, 
+    private renderer: Renderer2
+  ) { }
+  ngOnInit() {
+    this.renderer.setStyle(
+      this.elRef.nativeElement,
+      'background-color',
+      'blue');
+  }
+}
 ```
 
-notes
+### app.module.ts
+
+Import BetterHighlightDirective using `import { BetterHighlightDirective } from './better-highlight/better-highlight.directive';` and also add it to the declarations array
 ```
-code
+import { AppComponent } from './app.component';
+import { BasicHighlightDirective } from './basic-highlight/basic-highlight.directive';
+import { BetterHighlightDirective } from './better-highlight/better-highlight.directive';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    BasicHighlightDirective,
+    BetterHighlightDirective
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+### app.component.html
+
+Implement the directive
+```
+<p appBetterHighlight>Style me with a better directive</p>
 ```
 
 ## 94. Creating a Basic Attribute Directive
