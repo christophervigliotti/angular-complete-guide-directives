@@ -60,31 +60,32 @@ code
 
 ## 97. Using HostListener to Listen to Host Events
 
-link
+https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/6656176#overview 
 
-notes
+Imported `HostListener` and implemented it.  Note that `mouseenter` and `mouseleave` are event names that HostListener recogizes, and that `mouseEnters` and `mouseLeaves` are unique method names and can be anything
 ```
-code
-```
+@HostListener('mouseenter') mouseEnters(eventData: Event){
+  this.renderer.setStyle(
+    this.elRef.nativeElement,
+    'background-color',
+    'blue');
+}
 
-notes
+@HostListener('mouseleave') mouseLeaves(eventData: Event){
+  this.renderer.setStyle(
+    this.elRef.nativeElement,
+    'background-color',
+    'transparent');    
+}
 ```
-code
-```
-
 ## 96. More about the Renderer
 
-link
+https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/6730946#overview
 
-notes
-```
-code
-```
 
-notes
-```
-code
-```
+In the last lecture, we used the Angular Renderer class to change the style of a HTML element. As explained in that lecture, you should use the Renderer for any DOM manipulations.  
+  
+Of course, you can do more than simply change the styling of an element via setStyle(). Learn more about the available Renderer methods here >> https://angular.io/api/core/Renderer2 
 
 ## 95. Using the Renderer to build a Better Attribute Directive
 
@@ -95,6 +96,7 @@ https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/66561
 * Command `ng g d better-highlight` generates the new directive (and a test that I deleted).  File was moved into subfolder `better-highlight`.
 * Renderer2 is injected into the constructor method...as with the previous method, scoping the var to `private` allows us to access it in other methods in this object/directive.  
 * setStyle() method is used to change the background-color to blue
+* why is this a better approach?  angular is not limited to web...as such some apps might not have access to the DOM.
 
 ```
 import { Directive, OnInit, ElementRef, Renderer2 } from '@angular/core';
