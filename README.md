@@ -32,30 +32,87 @@ code
 
 ## 99. Binding to Directive Properties
 
-link
+https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/6656180#overview
 
-notes
+better-highlight.directive.ts  
 ```
-code
+// added...
+@Input() defaultColor: string = 'transparent';
+@Input() highlightColor: string = 'blue';
+
+// ...modified this line to remove the default color...
+@HostBinding('style.backgroundColor') backgroundColor: string;
+
+/* 
+...and changed ngOnInit to set the color here.  this allows us to
+set the color after it may be overridden/redefined outside of this directive (see app.component.html snippet below)
+*/
+ngOnInit() {
+  this.backgroundColor = this.defaultColor;
+}
+
+// ...and modified these methods to do the same
+@HostListener('mouseenter') mouseEnters(eventData: Event){
+  this.backgroundColor = this.highlightColor;
+}
+@HostListener('mouseleave') mouseLeaves(eventData: Event){
+  this.backgroundColor = this.defaultColor;
+}
 ```
 
-notes
+we can bind to defaultColor and highlightColor, passing strings in that override the default values of 'transparent' and 'blue'
+
+app.component.html
 ```
-code
+<p 
+  appBetterHighlight 
+  [defaultColor]="'yellow'" 
+  [highlightColor]="'red'"
+>Style me with a better directive</p>
+```
+
+if you have one property to bind you can provide an alias (here we added `'appBetterHighlight'` to `@Input('appBetterHighlight') highlightColor: string = 'blue';`).  This would change the implementation from this...
+```
+<p 
+  appBetterHighlight 
+  [defaultColor]="'yellow'" 
+  [highlightColor]="'red'"
+>Style me with a better directive</p>
+```
+
+...to this...
+```
+<p 
+  [appBetterHighlight]="'red'" 
+  [defaultColor]="'yellow'" 
+>Style me with a better directive</p>
+```
+Note that this is only an optional thing.
+
+Another note about roperty binding...if you pass down a string using square brackets and single quotes...you can take a shortcut, removing square brackets and single quotes (remember kids, strings only).   So `[defaultColor]="'yellow'" ` becomes `defaultColor="yellow" `, making the final code as such...
+```
+<p 
+  [appBetterHighlight]="'red'" 
+  defaultColor="yellow" 
+>Style me with a better directive</p>
 ```
 
 ## 98. Using HostBinding to Bind to Host Properties
 
-link
+https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/6656178#overview
 
-notes
+`@HostBinding` decorator replaces `renderer` code implemented in 97.  
+  
+better-highlight.directive.ts  
 ```
-code
-```
-
-notes
-```
-code
+@HostBinding('style.backgroundColor') backgroundColor: string = 'transparent';
+// ...and ...
+@HostListener('mouseenter') mouseEnters(eventData: Event){
+  this.backgroundColor = 'blue';
+}
+@HostListener('mouseleave') mouseLeaves(eventData: Event){
+  this.backgroundColor = 'transparent';
+}
 ```
 
 ## 97. Using HostListener to Listen to Host Events
@@ -70,7 +127,6 @@ Imported `HostListener` and implemented it.  Note that `mouseenter` and `mousele
     'background-color',
     'blue');
 }
-
 @HostListener('mouseleave') mouseLeaves(eventData: Event){
   this.renderer.setStyle(
     this.elRef.nativeElement,
