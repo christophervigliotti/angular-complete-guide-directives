@@ -2,7 +2,7 @@
 
 This is one of several repos that I created for the course "Angular - The Complete Guide (2022 Edition)". For a complete list of repos created for this course: https://gist.github.com/christophervigliotti/92e5b3b93cbe9d630d8e9d81b7eb6636 .
 
-## 101. Building a Structural Directive
+## 102. Understanding ngSwitch
 
 link
 
@@ -14,6 +14,90 @@ code
 notes
 ```
 code
+```
+
+## 101. Building a Structural Directive
+
+https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/6656186#overview
+
+### A. Create unless.directive.ts
+
+* Get the condition as an input with `@Input`.  Bind to a property named `appUnless`, whenever it changes execute a method (using a setter with the `set` keyword).  This is still a property, it's just a setter of the property which is a method that gets executed whenever the condition changes *phew*.  
+
+* We expose two things in the constructor: `TemplateRef` and `ViewContainerRef` are injected into the template.  TemplateRef gives us access to the template and ViewContainerRef gives us access to the place in the DOM where want to render it.  Template is the what and the viewContainer is the where (is that statement accurate?).  
+
+* Method `createEmbeddedView()` does.  This creates a view in this view container.  the view is our templateRef (argument `this.templateRef`).
+
+* Method `clear()` removes everything from this place in the DOM.
+
+```
+import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+
+@Directive({
+  selector: '[appUnless]'
+})
+export class UnlessDirective {
+  @Input() set appUnless(condition: boolean){
+    if(!condition){
+      this.viewContainerRef.createEmbeddedView(this.templateRef);
+    }else{
+      this.viewContainerRef.clear(); // remove everything from this place in the dom
+    }
+  }
+
+  constructor
+  (
+    private templateRef: TemplateRef<any>,
+    private viewContainerRef: ViewContainerRef
+  ) { }
+
+}
+```
+
+### B. Import and declare UnlessDirective in app.module.ts
+
+Added line `import { UnlessDirective } from './unless.directive';` and added `UnlessDirective` to the `declarations` array.
+
+```
+import { AppComponent } from './app.component';
+import { BasicHighlightDirective } from './basic-highlight/basic-highlight.directive';
+import { BetterHighlightDirective } from './better-highlight/better-highlight.directive';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { UnlessDirective } from './unless.directive';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    BasicHighlightDirective,
+    BetterHighlightDirective,
+    UnlessDirective
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+### C. Implement UnlessDirective in app.component.html
+
+In this implmenetion we pass in `onlyOdd`, which fires the logic that we put in the "method inside of a property" `@Input` declaration in unless.directive.ts
+
+```
+<!-- even -->
+<div *appUnless="onlyOdd">
+  <li
+    class="list-group-item"
+    [ngClass]="{odd: odd % 2 == 0}" 
+    [ngStyle]="{backgroundColor: odd % 2 == 0?'yellow':'transparent'}"
+    *ngFor="let even of evenNumbers" 
+  >{{ even }}</li>
+</div>
 ```
 
 ## 100. What Happens behind the Scenes on Structural Directives

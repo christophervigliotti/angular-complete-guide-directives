@@ -7,6 +7,8 @@
       >toggle odd/even numbers</button>
       <br><br>
       <ul class="list-group">
+        
+        <!-- odd -->
         <div *ngIf="onlyOdd">
           <li
             class="list-group-item" 
@@ -15,7 +17,9 @@
             *ngFor="let odd of oddNumbers" 
           >{{ odd }}</li>
         </div>
-        <div *ngIf="!onlyOdd">
+
+        <!-- even -->
+        <div *appUnless="onlyOdd">
           <li
             class="list-group-item"
             [ngClass]="{odd: odd % 2 == 0}" 
@@ -25,9 +29,15 @@
         </div>
 
         <!-- 
-        added for 100 
-        ng-template allows us to define a template
-        -->
+        TODO: delete me
+        <div *ngIf="!onlyOdd">
+          <li
+            class="list-group-item"
+            [ngClass]="{odd: odd % 2 == 0}" 
+            [ngStyle]="{backgroundColor: odd % 2 == 0?'yellow':'transparent'}"
+            *ngFor="let even of evenNumbers" 
+          >{{ even }}</li>
+        </div>
         <ng-template [ngIf]="!onlyOdd">
           <div>
             <li
@@ -38,6 +48,7 @@
           >ng-template style! {{ even }}</li>   
           </div>
         </ng-template>
+        -->
 
       </ul>
       <p appBasicHighlight>Style me with basic directive</p>
