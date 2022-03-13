@@ -18,16 +18,35 @@ code
 
 ## 100. What Happens behind the Scenes on Structural Directives
 
-link
+https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/6656182#overview
 
-notes
+* the star * is the required prefix for a structural directive.
+* angular transforms *ngSomething into a structural directive
+
+without structural directive (using `ng-template`)...
 ```
-code
+<ng-template [ngIf]="!onlyOdd">
+  <div>
+    <li
+    class="list-group-item"
+    [ngClass]="{odd: odd % 2 == 0}" 
+    [ngStyle]="{backgroundColor: odd % 2 == 0?'yellow':'transparent'}"
+    *ngFor="let even of evenNumbers" 
+  >ng-template style! {{ even }}</li>   
+  </div>
+</ng-template>
 ```
 
-notes
-```
-code
+with an `*ngIf` structural directive...
+ ```
+<div *ngIf="!onlyOdd">
+  <li
+    class="list-group-item"
+    [ngClass]="{odd: odd % 2 == 0}" 
+    [ngStyle]="{backgroundColor: odd % 2 == 0?'yellow':'transparent'}"
+    *ngFor="let even of evenNumbers" 
+  >{{ even }}</li>
+</div>
 ```
 
 ## 99. Binding to Directive Properties
