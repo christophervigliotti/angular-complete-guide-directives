@@ -4,16 +4,15 @@ This is one of several repos that I created for the course "Angular - The Comple
 
 ## 102. Understanding ngSwitch
 
-link
+https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/6656188#overview
 
-notes
+* it's switch/case for your templates
 ```
-code
-```
-
-notes
-```
-code
+<div [ngSwitch]="value">
+  <p *ngSwitchCase="5">Value is 5</p>
+  <p *ngSwitchCase="31">Value is 31</p>
+  <p *ngSwitchDefault>Value is default</p>
+</div>
 ```
 
 ## 101. Building a Structural Directive
